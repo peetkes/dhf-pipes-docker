@@ -10,11 +10,11 @@ services:
       container_name: ${stackName}.dhf.local
       environment:
         - MARKLOGIC_INIT=true
-        - MARKLOGIC_ADMIN_USERNAME=${admin}
-        - MARKLOGIC_ADMIN_PASSWORD=${password}
+        - MARKLOGIC_ADMIN_USERNAME=${mlAdmin}
+        - MARKLOGIC_ADMIN_PASSWORD=${mlPassword}
         - TZ=Europe/Prague
       ports:
-        - ${markLogicPortMapping}:7997-8025
+        - ${markLogicPortMapping}:${mlPortRange}
       volumes:
         - ./volumes/${stackName}.dhf.local/:/var/opt/MarkLogic/:delegated
       networks:
@@ -29,8 +29,9 @@ services:
           - quickstart_download_url=${quickStartURL}
       image: quick.start
       environment:
-        - MARKLOGIC_ADMIN_USERNAME=${admin}
-        - MARKLOGIC_ADMIN_PASSWORD=${password}
+        - SERVER_PORT=${quickstartPort}
+        - MARKLOGIC_ADMIN_USERNAME=${mlAdmin}
+        - MARKLOGIC_ADMIN_PASSWORD=${mlPassword}
         - STACK_NAME=${stackName}
         - DHF_VERSION=${DHFversion}
       depends_on:     
@@ -38,7 +39,7 @@ services:
       hostname: ${stackName}.quick_start
       container_name: ${stackName}.quick_start
       ports:
-       - ${quickStartPortMapping}:8080
+       - ${quickStartPortMapping}:${quickstartPort}
       volumes:
        - ./DHF-config:/DHF-config:delegated
        - ./data:/data:delegated
@@ -53,9 +54,9 @@ services:
           - pipes_download_url=${pipesURL}
       image: dhf.pipes
       environment:
-        - SERVER_PORT=${server.port}
-        - MARKLOGIC_ADMIN_USERNAME=${admin}
-        - MARKLOGIC_ADMIN_PASSWORD=${password}
+        - SERVER_PORT=${pipesPort}
+        - MARKLOGIC_ADMIN_USERNAME=${mlAdmin}
+        - MARKLOGIC_ADMIN_PASSWORD=${mlPassword}
         - STACK_NAME=${stackName}
         - ADMIN_PORT=${mlAdminPort}
         - APPSERVICES_PORT=${mlAppServicesPort}
@@ -66,7 +67,7 @@ services:
         - marklogic.dhf.local
       container_name: ${stackName}.pipes
       ports:
-       - ${pipesPortMapping}:8081
+       - ${pipesPortMapping}:${pipesPort}
       volumes:
         - ./PIPES-dhf:/PIPES-dhf:delegated
         - ./data:/data:delegated

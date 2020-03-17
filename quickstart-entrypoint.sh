@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+cat >application.properties <<EOF
+server.port=$SERVER_PORT
+EOF
 
 cat >DHF-config/gradle-docker.properties <<EOF
 mlUsername=$MARKLOGIC_ADMIN_USERNAME
@@ -14,7 +17,5 @@ plugins {
     id 'com.marklogic.ml-data-hub' version '$DHF_VERSION'
   }
 EOF
-
-
 
 exec "$@"
