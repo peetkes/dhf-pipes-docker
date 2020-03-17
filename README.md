@@ -1,6 +1,7 @@
 # dhf-pipes-docker
 
 This project can be used as a git submodule for a project that needs docker containers for MarkLogic DHF. MarkLogic DHF QuickStart and MarkLogic Pipes.
+(it is based on the work Stuart Moorhouse did in this repo: https://gitlab.com/stuartmoorhouse/marklogic-dhf_quickstart )
 
 ## Usage
 
