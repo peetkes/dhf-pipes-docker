@@ -1,0 +1,76 @@
+version: '3.7'
+
+networks:
+  marklogicDHF:
+
+services:
+    marklogic.dhf.local:
+      image: store/marklogicdb/marklogic-server:${mlVersion}
+      hostname: ${stackName}.dhf.local
+      container_name: ${stackName}.dhf.local
+      environment:
+        - MARKLOGIC_INIT=true
+        - MARKLOGIC_ADMIN_USERNAME=${admin}
+        - MARKLOGIC_ADMIN_PASSWORD=${password}
+        - TZ=Europe/Prague
+      ports:
+        - ${markLogicPortMapping}:7997-8025
+      volumes:
+        - ./volumes/${stackName}.dhf.local/:/var/opt/MarkLogic/:delegated
+      networks:
+        - marklogicDHF
+
+
+    quick.start:
+      build: 
+        context: .
+        dockerfile: quickstart.Dockerfile
+        args:
+          - quickstart_download_url=${quickStartURL}
+      image: quick.start
+      environment:
+        - MARKLOGIC_ADMIN_USERNAME=${admin}
+        - MARKLOGIC_ADMIN_PASSWORD=${password}
+        - STACK_NAME=${stackName}
+        - DHF_VERSION=${DHFversion}
+      depends_on:     
+        - marklogic.dhf.local
+      hostname: ${stackName}.quick_start
+      container_name: ${stackName}.quick_start
+      ports:
+       - ${quickStartPortMapping}:8080
+      volumes:
+       - ./DHF-config:/DHF-config:delegated
+       - ./data:/data:delegated
+      networks:
+       - marklogicDHF  
+
+    pipes:
+      build: 
+        context: .
+        dockerfile: pipes.Dockerfile
+        args:
+          - pipes_download_url=${pipesURL}
+      image: dhf.pipes
+      environment:
+        - MARKLOGIC_ADMIN_USERNAME=${admin}
+        - MARKLOGIC_ADMIN_PASSWORD=${password}
+        - STACK_NAME=${stackName}
+        - ADMIN_PORT=${mlAdminPort}
+        - APPSERVICES_PORT=${mlAppServicesPort}
+        - MANAGE_PORT=${mlManagePort}
+        - STAGING_PORT=${mlStagingPort}
+        - DHF_ROOT=/PIPES-dhf
+      depends_on: 
+        - marklogic.dhf.local
+      container_name: ${stackName}.pipes
+      ports:
+       - ${pipesPortMapping}:8081
+      volumes:
+        - ./PIPES-dhf:/PIPES-dhf:delegated
+        - ./data:/data:delegated
+      networks:
+        - marklogicDHF
+
+
+
