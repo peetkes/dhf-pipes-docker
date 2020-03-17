@@ -53,6 +53,7 @@ services:
           - pipes_download_url=${pipesURL}
       image: dhf.pipes
       environment:
+        - SERVER_PORT=${server.port}
         - MARKLOGIC_ADMIN_USERNAME=${admin}
         - MARKLOGIC_ADMIN_PASSWORD=${password}
         - STACK_NAME=${stackName}

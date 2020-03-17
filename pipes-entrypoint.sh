@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 cat >application.properties <<EOF
-serverport=8081
+server.port=8081
 
 mlHost=$STACK_NAME.dhf.local
 mlStagingPort=$STAGING_PORT
