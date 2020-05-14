@@ -5,7 +5,7 @@ networks:
 
 services:
     marklogic.dhf.local:
-      image: store/marklogicdb/marklogic-server:${mlVersion}
+      image: mlregistry.marklogic.com/marklogic/ml-${mlVersion}
       hostname: ${stackName}.dhf.local
       container_name: ${stackName}.dhf.local
       environment:
@@ -19,7 +19,6 @@ services:
         - ./volumes/${stackName}.dhf.local/:/var/opt/MarkLogic/:delegated
       networks:
         - marklogicDHF
-
 
     quick.start:
       build: 
@@ -39,10 +38,10 @@ services:
       hostname: ${stackName}.quick_start
       container_name: ${stackName}.quick_start
       ports:
-       - ${quickStartPortMapping}:${quickstartPort}
+        - ${quickStartPortMapping}:${quickstartPort}
       volumes:
-       - ./DHF-config:/DHF-config:delegated
-       - ./data:/data:delegated
+        - ./../:/project:delegated
+        - ./../data:/data:delegated
       networks:
        - marklogicDHF  
 
@@ -62,15 +61,15 @@ services:
         - APPSERVICES_PORT=${mlAppServicesPort}
         - MANAGE_PORT=${mlManagePort}
         - STAGING_PORT=${mlStagingPort}
-        - DHF_ROOT=/PIPES-dhf
+        - DHF_ROOT=/project
       depends_on: 
         - marklogic.dhf.local
       container_name: ${stackName}.pipes
       ports:
        - ${pipesPortMapping}:${pipesPort}
       volumes:
-        - ./PIPES-dhf:/PIPES-dhf:delegated
-        - ./data:/data:delegated
+        - ./../:/project:delegated
+        - ./../data:/data:delegated
       networks:
         - marklogicDHF
 

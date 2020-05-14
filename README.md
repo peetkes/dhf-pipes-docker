@@ -100,8 +100,11 @@ Then you can build and run your stack by executing this command in your root pro
 ````
 docker-compose -f docker/docker-compose.yml up
 ````
+Go to the MarkLogic Admin UI on http://localhost:8001 and setup the node
 
 Go to the QuickStart application on your browser by default this will be at http://localhost:9080 unless you've change the quickStartPortMapping value in your .env file.
+
+If it is a first time run, you need to install the dhf project by navigating to the /project folder and select the docker environment.
 
 Set the MarkLogic host to ${stackName}.dhf.local. For example, if you set stackName to be "test" in the .env file, set it to test.dhf.local
 
