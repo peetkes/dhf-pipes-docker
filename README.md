@@ -11,7 +11,7 @@ Create a file named '.env'
 stackName=test
 
 # MarkLogic properties
-DHFversion=5.2.1
+DHFversion=5.2.3
 mlAdmin=admin
 mlPassword=admin
 mlVersion=10.0-4.1
@@ -22,9 +22,8 @@ mlStagingPort=8010
 mlPortRange=7997-8025
 
 # Download urls
-quickStartURL=https://github.com/marklogic/marklogic-data-hub/releases/download/v5.2.0/marklogic-datahub-5.2.0.war
-pipesURL=https://github.com/marklogic-community/pipes/releases/download/1.0-beta.4/marklogic-pipes-1.0-beta.4.jar
-
+quickStartURL=https://github.com/marklogic/marklogic-data-hub/releases/download/v5.2.3/marklogic-datahub-5.2.3.war
+pipesURL=https://github.com/marklogic-community/pipes/releases/download/1.3-release/marklogic-pipes-1.3.jar
 # Port mappings
 markLogicPortMapping=7997-8025
 quickStartPortMapping=9080
@@ -68,7 +67,7 @@ In the root of your own project you can create a file named .env with the follow
 stackName=sccss
 
 # MarkLogic properties
-DHFversion=5.2.1
+DHFversion=5.2.3
 mlAdmin=admin
 mlPassword=admin
 mlVersion=10.0-4.1
@@ -79,8 +78,8 @@ mlStagingPort=8010
 mlPortRange=7997-8025
 
 # Download urls
-quickStartURL=https://github.com/marklogic/marklogic-data-hub/releases/download/v5.2.1/marklogic-datahub-5.2.1.war
-pipesURL=https://github.com/marklogic-community/pipes/releases/download/1.0.2-release/marklogic-pipes-1.0.2-release.jar
+quickStartURL=https://github.com/marklogic/marklogic-data-hub/releases/download/v5.2.3/marklogic-datahub-5.2.3.war
+pipesURL=https://github.com/marklogic-community/pipes/releases/download/1.3-release/marklogic-pipes-1.3.jar
 
 # Port mappings
 markLogicPortMapping=7997-8025
